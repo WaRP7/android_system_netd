@@ -685,15 +685,16 @@ WARN_UNUSED_RESULT int modifyPhysicalNetwork(unsigned netId, const char* interfa
     }
 
     if (int ret = modifyIncomingPacketMark(netId, interface, permission, add)) {
-        return ret;
+
+	ALOGE("failed to apply rules error = %d", ret);
     }
     if (int ret = modifyExplicitNetworkRule(netId, table, permission, INVALID_UID, INVALID_UID,
                                             add)) {
-        return ret;
+	ALOGE("failed to apply rules error = %d", ret);
     }
     if (int ret = modifyOutputInterfaceRule(interface, table, permission, INVALID_UID, INVALID_UID,
                                             add)) {
-        return ret;
+	ALOGE("failed to apply rules error = %d", ret);
     }
     return modifyImplicitNetworkRule(netId, table, permission, add);
 }
